@@ -26,8 +26,6 @@ class Matrix:
     def average(self, property):
         arr =[]
         arr = self.parse(property)
-        letter_tuple_asci = {}
-        name_in_asci_tuples=[]
         names_in_asci = []
         flag = 0
         if property == "average" or property == "id":
@@ -39,17 +37,8 @@ class Matrix:
                     ob_temp = Matrix(names_in_asci)
                     for letter in word: # for every letter in name
                         number = ord(letter) - 96 #convertion to asci
-                        print(str(letter) + " in asci:" + str(number))
-                        letter_tuple_asci.update({"name": number})
-                        name_in_asci_tuples.append(letter_tuple_asci) #append asci value for each letter of name to a list
-                    print(name_in_asci_tuples)
-                    ob_temp = Matrix(name_in_asci_tuples)
-                    names_in_asci.append(str({"name":ob_temp.total("name")}))
-                    print("bla"+ str(names_in_asci))
-
-            # ob_temp_final = Matrix(names_in_asci)
-            # ob_temp_final.average("name")
-            print("asd")
+                        names_in_asci.append(number)
+            print("The average value of the property: " + str(property) + "," + " is: " + str(np.average(names_in_asci)))
 
 
 
@@ -79,10 +68,38 @@ class MatrixException(Exception):
 
 
 ob = Matrix(converted_data)
-ob.total("name")
+ob.average("name")
 
 # except MatrixException as e:
 #     print(e.message)
 #
 # finally:
 file.close()
+
+#
+#
+# d = dict()
+# years = []
+#
+# (get 2 column list of years and values)
+#
+# for line in list:
+#     year = line[0]
+#     value = line[1]
+#
+# for line in list:
+#     if year in d.keys():
+#         d[value].append(value)
+#     else:
+#         d[value] = value
+#         d[year] = year
+#
+# years_dict = dict()
+#
+# for line in list:
+#     if line[0] in years_dict:
+#         # append the new number to the existing array at this slot
+#         Matrix["name"].append(line[1])
+#     else:
+#         # create a new array in this slot
+#         years_dict[line[0]] = [line[1]]
