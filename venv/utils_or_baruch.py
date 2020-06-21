@@ -26,22 +26,18 @@ class Matrix:
     def average(self, property):
         arr =[]
         arr = self.parse(property)
-        names_in_asci = []
-        flag = 0
+        names_in_ascii = []
         if property == "average" or property == "id":
             arr = self.parse(property)
             print("The average value of the property: " + str(property) + "," + " is: " + str(np.average(arr)))
         if property == "name":
             for word in arr: # for every name in arr of names
-                if word.isalpha():  # checks if letter is alphabetic before converting to asci
-                    ob_temp = Matrix(names_in_asci)
+                if word.isalpha():  # checks if word(name) is alphabetic before converting to ascii
                     for letter in word: # for every letter in name
-                        number = ord(letter) - 96 #convertion to asci
-                        names_in_asci.append(number)
-            print("The average value of the property: " + str(property) + "," + " is: " + str(np.average(names_in_asci)))
-
-
-
+                        number = ord(letter) - 96 #convertion to ascii
+                        names_in_ascii.append(number)
+            print("The average value of the property: "
+                  + str(property) + "," + " is: " + str(round(np.average(names_in_ascii),4)))
 
     def min(self, property):
         arr = []
