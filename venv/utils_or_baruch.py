@@ -6,8 +6,6 @@ import json
 import numpy as np
 import os.path
 
-fileName = 'data.json'
-
 class MatrixException(Exception):
     pass
 
@@ -67,14 +65,19 @@ class Matrix:
             arr = np.array(arr, dtype=object) # to handle strings list
         print("The total value of the property: " + str(property) + "," + " is: " + str(np.sum(arr)))
 
+fileName = 'data.json'
+
 def check_if_file_exists():
     if not os.path.isfile(fileName):
         raise MatrixException("File doesn't exist")
+try:
+    with open(fileName, 'r') as file:  # since file exists, open it
+        file_data = file.read()  # taking the read data and save it as a string line
+    converted_data = json.loads(file_data)  # converting the JSON type data string into a python string
+    ob = Matrix(converted_data)  # creating an instande object of a Matrix class with given data file
+except Exception as e:
+    print()
 
-with open(fileName, 'r') as file:  # since file exists, open it
-    file_data = file.read()        # taking the read data and save it as a string line
-converted_data = json.loads(file_data) # converting the JSON type data string into a python string
-ob = Matrix(converted_data) # creating an instande object of a Matrix class with given data file
 
 def property_options():
     while True:
@@ -110,10 +113,16 @@ def menu():
             property_option = property_options() # gets the Property string value that we chose
             if property_option != '5':
                 method_options(property_option)  # sending the Property to the
-                                                 # methods_options() to choose what method we want
+                                                     # methods_options() to choose what method we want
             else: break
     except MatrixException as e:
         print(e.message)
+
 menu()
 
-file.close()
+try:
+    file.close()
+except Exception as e:
+    print()
+
+
